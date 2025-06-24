@@ -8,4 +8,5 @@ public class Booking
     public string Phone { get; set; }
     public int PersonCount { get; set; }
     public DateTime Date { get; set; }
+    public int MyProperty { get; set; }
 }
