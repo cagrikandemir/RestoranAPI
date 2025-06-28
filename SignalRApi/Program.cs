@@ -19,7 +19,9 @@ builder.Services.AddDbContext<SignalRContext>();
 //About
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
-
+//Booking
+builder.Services.AddScoped<IBookingService, BookingManager>();
+builder.Services.AddScoped<IBookingDal, EfBookingDal>();
 
 
 builder.Services.AddEndpointsApiExplorer();

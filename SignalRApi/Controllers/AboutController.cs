@@ -7,7 +7,7 @@ using SignalR.EntityLayer.Entities;
 
 namespace SignalRApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AboutController : ControllerBase
     {
