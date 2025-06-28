@@ -23,7 +23,7 @@ namespace SignalRApi.Controllers
             var values = _aboutService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public IActionResult GetById(int Id)
         {
             var value = _aboutService.TGetById(Id);
@@ -54,7 +54,7 @@ namespace SignalRApi.Controllers
             _aboutService.TUpdate(about);
             return Ok("About Updated Successfully");
         }
-        [HttpDelete("[action]/{id}")]
+        [HttpDelete("[action]")]
         public IActionResult Delete (int Id)
         {
             var value= _aboutService.TGetById(Id);
