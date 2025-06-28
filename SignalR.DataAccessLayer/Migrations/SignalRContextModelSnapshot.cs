@@ -156,6 +156,9 @@ namespace SignalR.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureId"));
 
+                    b.Property<string>("Despcription1")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Despcription2")
                         .HasColumnType("nvarchar(max)");
 

@@ -61,8 +61,8 @@ namespace SignalRApi.Controllers
         public IActionResult Delete(int Id)
         {
             var value = _bookingService.TGetById(Id);
-                _bookingService.TDelete(value);
-                return Ok("Booking Deleted Successfully");
+            _bookingService.TDelete(value);
+            return Ok("Booking Deleted Successfully");
         }
     }
 }

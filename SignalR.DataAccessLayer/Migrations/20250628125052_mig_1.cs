@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SignalR.DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mig_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -96,6 +96,7 @@ namespace SignalR.DataAccessLayer.Migrations
                     FeatureId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Despcription1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Despcription2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
