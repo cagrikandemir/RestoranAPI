@@ -13,6 +13,11 @@ public class ProductManager : IProductService
         _productDal = productDal;
     }
 
+    public List<Product> GetAllProductsWithCategory()
+    {
+        return _productDal.GetAllProductsWithCategory();
+    }
+
     public void TAdd(Product entity)
     {
         _productDal.Add(entity);

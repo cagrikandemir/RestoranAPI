@@ -5,6 +5,7 @@ using SignalR.BusinessLayer.Concrete;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.EntityFramework;
+using SignalRApi.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<SignalRContext>();
+builder.Services.AddAutoMapper(typeof(ProductMapping));
+
 
 //About
 builder.Services.AddScoped<IAboutService, AboutManager>();
