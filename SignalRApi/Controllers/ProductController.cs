@@ -40,8 +40,8 @@ namespace SignalRApi.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAllProductsWithCategory()
         {
-                var values = _context.Products.Include(x => x.Category)
-                .Select(y => new ResultProductWithCategory
+             var values = _context.Products.Include(x => x.Category)
+            .Select(y => new ResultProductWithCategory
         {
             ProductId = y.ProductId,
             ProductName = y.ProductName,
