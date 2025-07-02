@@ -1,11 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SignalRWebUI.Dtos.CategoryDtos;
 
 namespace SignalRWebUI.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public CategoryController(IHttpClientFactory httpClientFactory)
         {
+            _httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responsemessage = await client.GetAsync("https://localhost:7111/Category/GetAll");
+            if (responsemessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responsemessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsondata);
+                return View(values);
+
+            }
             return View();
         }
     }
