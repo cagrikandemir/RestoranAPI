@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
             var values = _categoryService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _categoryService.TGetById(Id);
