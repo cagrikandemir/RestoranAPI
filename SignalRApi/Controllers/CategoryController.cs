@@ -51,7 +51,7 @@ namespace SignalRApi.Controllers
             _categoryService.TUpdate(category);
             return Ok("Category Updated Successfully");
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete(int Id)
         {
             var value = _categoryService.TGetById(Id);

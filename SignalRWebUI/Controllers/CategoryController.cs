@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.CategoryDtos;
+using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
@@ -35,10 +36,21 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData=JsonConvert.SerializeObject(createCategoryDto);
-            var stringContent= new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage=await client.PostAsync("https://localhost:7111/Category/Create", stringContent);
-            if(responseMessage.IsSuccessStatusCode)
+            var jsonData = JsonConvert.SerializeObject(createCategoryDto);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7111/Category/Add", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+        public async Task<IActionResult> DeleteCategory(int Id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7111/Category/Delete/{Id}");
+            if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
