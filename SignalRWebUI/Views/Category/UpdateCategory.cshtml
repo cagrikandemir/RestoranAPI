@@ -20,6 +20,15 @@
                                 <input type="text" class="form-control" asp-for="CategoryName" id="categoryname">
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="status">Kategori Aktif mi?</label>
+                                    <select asp-for="CategoryStatus" class="form-control">
+                                        <option value="true">Evet</option>
+                                        <option value="false">Hayır</option>
+                                    </select>
+                            </div>
+                        </div>
                         <div class="card-action">
                             <button class="btn btn-success">Kategoriyi Güncelle</button>
                             <a href="/Category" class="btn btn-warning">Geri Dön</a>
