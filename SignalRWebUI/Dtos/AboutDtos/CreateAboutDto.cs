@@ -1,8 +1,7 @@
-﻿namespace SignalR.DtoLayer.AboutDto;
+﻿namespace SignalRWebUI.Dtos.AboutDtos;
 
-public class GetAboutDto
+public class CreateAboutDto
 {
-    public int AboutId { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }

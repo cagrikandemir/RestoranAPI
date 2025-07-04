@@ -1,0 +1,46 @@
+﻿@model SignalRWebUI.Dtos.AboutDtos.CreateAboutDto
+@{
+    ViewData["Title"] = "CreateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Hakkımda İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yeni Hakkımda Girişi</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Başlık Adını Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title" id="title">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ımageurl">Resim Yolunu Giriniz</label>
+                                <input type="text" class="form-control" asp-for="ImageUrl" id="ımageurl">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="despcription">Açıklama Giriniz</label>
+                                <textarea rows="5" type="text" class="form-control" asp-for="Description" id="despcription"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">Kategoriyi Ekle</button>
+                            <a href="/About" class="btn btn-warning">Geri Dön</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

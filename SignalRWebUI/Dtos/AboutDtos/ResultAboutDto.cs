@@ -1,6 +1,6 @@
-﻿namespace SignalR.DtoLayer.AboutDto;
+﻿namespace SignalRWebUI.Dtos.AboutDtos;
 
-public class GetAboutDto
+public class ResultAboutDto
 {
     public int AboutId { get; set; }
     public string? Title { get; set; }

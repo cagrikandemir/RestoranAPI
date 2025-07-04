@@ -23,7 +23,7 @@ namespace SignalRApi.Controllers
             var values = _aboutService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _aboutService.TGetById(Id);
@@ -35,7 +35,7 @@ namespace SignalRApi.Controllers
             About about = new About
             {
                 Title = createAboutDto.Title,
-                Despcription = createAboutDto.Despcription,
+                Description = createAboutDto.Description,
                 ImageUrl = createAboutDto.ImageUrl
             };
             _aboutService.TAdd(about);
@@ -48,13 +48,13 @@ namespace SignalRApi.Controllers
             {
                 AboutId = updateAboutDto.AboutId,
                 Title = updateAboutDto.Title,
-                Despcription = updateAboutDto.Despcription,
+                Description = updateAboutDto.Description,
                 ImageUrl = updateAboutDto.ImageUrl
             };
             _aboutService.TUpdate(about);
             return Ok("About Updated Successfully");
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete (int Id)
         {
             var value= _aboutService.TGetById(Id);
