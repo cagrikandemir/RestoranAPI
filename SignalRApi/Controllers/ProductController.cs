@@ -80,7 +80,8 @@ namespace SignalRApi.Controllers
                 Despcription = updateProductDto.Despcription,
                 Price = updateProductDto.Price,
                 ImageUrl = updateProductDto.ImageUrl,
-                ProductStatus = updateProductDto.ProductStatus
+                ProductStatus = updateProductDto.ProductStatus,
+                CategoryId = updateProductDto.CategoryId
             };
             _productService.TUpdate(product);
             return Ok("Product Updated Succesfully");

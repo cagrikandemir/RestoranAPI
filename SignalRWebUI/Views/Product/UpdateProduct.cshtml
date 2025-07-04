@@ -19,6 +19,18 @@
                             <div class="form-group">
                                 <label for="productname">Ürün Adını Düzenleyiniz</label>
                                 <input type="text" class="form-control" asp-for="ProductName" id="productname">
+                            </div> 
+                            <div class="form-group">
+                                <label for="price">Ürün Ücretini Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="Price" id="price">
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryname">Ürün Kategorisini Düzenleyiniz</label>
+                                @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Ürün Aktif mi ?</label>
+                                <input type="text" class="form-control" asp-for="Price" id="price">
                             </div>
                         </div>
                         <div class="card-action">

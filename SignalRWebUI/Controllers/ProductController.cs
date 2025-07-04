@@ -72,15 +72,48 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult>UpdateProduct(int Id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7111/Category/GetById/{Id}");
+
+            // 🔽 1. Kategori verisini API'den çekiyoruz
+            var categoryResponse = await client.GetAsync("https://localhost:7111/Category/GetAll");
+            if (categoryResponse.IsSuccessStatusCode)
+            {
+                var categoryJson = await categoryResponse.Content.ReadAsStringAsync();
+                var values1 = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(categoryJson);
+
+                // 🔽 2. ViewBag'e SelectList oluşturuyoruz
+                List<SelectListItem> values2 = (from x in values1
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.CategoryName,
+                                                    Value = x.CategoryId.ToString()
+                                                }).ToList();
+                ViewBag.v = values2;
+            }
+
+            // 🔽 3. Ürün verisini çekiyoruz
+            var responseMessage = await client.GetAsync($"https://localhost:7111/Product/GetById/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var value = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData);
                 return View(value);
             }
+
             return View();
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(UpdateProductDto updateproductdto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateproductdto);
+            var stringContent = new StringContent(jsonData,Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("https://localhost:7111/Product/Update", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }
