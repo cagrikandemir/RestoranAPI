@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
             var values = _bookingService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _bookingService.TGetById(Id);
@@ -57,7 +57,7 @@ namespace SignalRApi.Controllers
             _bookingService.TUpdate(booking);
             return Ok("Booking Updated Successfully");
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete(int Id)
         {
             var value = _bookingService.TGetById(Id);
