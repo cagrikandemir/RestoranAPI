@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
             var values = _socialMediaService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _socialMediaService.TGetById(Id);
@@ -53,7 +53,7 @@ namespace SignalRApi.Controllers
             _socialMediaService.TUpdate(socialMedia);
             return Ok("Social Media Updated Succesfully");
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete(int Id)
         {
             var value = _socialMediaService.TGetById(Id);

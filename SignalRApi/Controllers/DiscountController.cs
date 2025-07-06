@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
             var values = _discountService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _discountService.TGetById(Id);
@@ -55,7 +55,7 @@ namespace SignalRApi.Controllers
             _discountService.TUpdate(discount);
             return Ok("About Updated Successfully");
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete(int Id)
         {
             var value = _discountService.TGetById(Id);

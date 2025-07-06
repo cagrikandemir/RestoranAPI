@@ -1,0 +1,61 @@
+﻿@model SignalRWebUI.Dtos.TestimonialDtos.CreateTestimonialDto
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Referans İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yeni Referans Girişi</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title"> Adını Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Name" id="title">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Başlık Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title" id="title">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="comment">Yorum Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Comment" id="comment">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ımg">Görsel Seçiniz</label>
+                                <input type="text" class="form-control" asp-for="ImageUrl" id="ımg">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="status">Referans Aktif mi?</label>
+                                <select asp-for="Status" class="form-control">
+                                    <option value="true">Evet</option>
+                                    <option value="false">Hayır</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">Referans Ekle</button>
+                            <a href="/Testimonial" class="btn btn-warning">Geri Dön</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

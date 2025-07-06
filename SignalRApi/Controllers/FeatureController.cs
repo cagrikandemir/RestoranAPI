@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
             var values = _featureService.TGetAllList();
             return Ok(values);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
             var value = _featureService.TGetById(Id);
@@ -60,7 +60,7 @@ namespace SignalRApi.Controllers
             return Ok("Feature Updated Succesfuly");
         }
 
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{Id}")]
         public IActionResult Delete(int Id)
         {
             var value = _featureService.TGetById(Id);

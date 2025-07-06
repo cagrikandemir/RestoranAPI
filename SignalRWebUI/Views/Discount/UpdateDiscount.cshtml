@@ -1,0 +1,47 @@
+﻿@model SignalRWebUI.Dtos.DiscountDtos.UpdateDiscountDto
+@{
+    ViewData["Title"] = "UpdateDiscount";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">İndirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">İndirim Güncelle</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" asp-for="DiscountId" />
+                            <div class="form-group">
+                                <label for="name">Ürün Adını Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="Title" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="despcription">İndirimli Ürün Açıklamasını Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="Despcription" id="despcription">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Ürün İndirimi Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="Amount" id="amount">
+                            </div>
+                            <div class="form-group">
+                                <label for="ımgurl">Ürün Görseli Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="ImageUrl" id="ımgurl">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">İndirim Güncelle</button>
+                            <a href="/Discount" class="btn btn-warning">Geri Dön</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
