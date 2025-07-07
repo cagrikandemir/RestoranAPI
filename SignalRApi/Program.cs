@@ -17,6 +17,18 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<SignalRContext>();
 builder.Services.AddAutoMapper(typeof(ProductMapping));
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host => true))
+        .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
+
 
 //About
 builder.Services.AddScoped<IAboutService, AboutManager>();
@@ -69,6 +81,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
         options.RoutePrefix = string.Empty; // 🔥 Swagger root'ta çalışsın
     });
 }
+app.UseCors("CorsPolicy");
+
 
 app.UseHttpsRedirection();
 
