@@ -38,6 +38,11 @@ public class ProductManager : IProductService
         return _productDal.GetById(Id);
     }
 
+    public int TProductCount()
+    {
+        return _productDal.ProductCount();
+    }
+
     public void TUpdate(Product entity)
     {
         _productDal.Update(entity);
