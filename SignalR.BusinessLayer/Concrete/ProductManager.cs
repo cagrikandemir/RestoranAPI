@@ -18,6 +18,16 @@ public class ProductManager : IProductService
         return _productDal.GetAllProductsWithCategory();
     }
 
+    public int TProductCountByCategoryNameDrink()
+    {
+        return _productDal.ProductCountByCategoryNameDrink();
+    }
+
+    public int TProductCountByCategoryNameHamburger()
+    {
+        return _productDal.ProductCountByCategoryNameHamburger();
+    }
+
     public void TAdd(Product entity)
     {
         _productDal.Add(entity);
@@ -46,5 +56,20 @@ public class ProductManager : IProductService
     public void TUpdate(Product entity)
     {
         _productDal.Update(entity);
+    }
+
+    public decimal TProductPriceAvg()
+    {
+        return _productDal.ProductPriceAvg();
+    }
+
+    public string TProductPriceByMax()
+    {
+        return _productDal.ProductPriceByMax();
+    }
+
+    public string TProductPriceByMin()
+    {
+        return _productDal.ProductPriceByMin();
     }
 }

@@ -24,4 +24,37 @@ public class EfProductDal : GenericRepository<Product>, IProductDal
         var context = new SignalRContext();
         return context.Products.Count();
     }
+
+    public int ProductCountByCategoryNameDrink()
+    {
+        var context = new SignalRContext();
+        return context.Products.Where(x=>x.CategoryId==(context.Categories.Where(y=>y.CategoryName=="İçecek")
+        .Select)(z=>z.CategoryId).FirstOrDefault()).Count();
+    }
+
+    public int ProductCountByCategoryNameHamburger()
+    {
+        var context = new SignalRContext();
+        return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburger")
+        .Select)(z => z.CategoryId).FirstOrDefault()).Count();
+    }
+
+    public decimal ProductPriceAvg()
+    {
+        var context = new SignalRContext();
+        return context.Products.Average(x => x.Price);
+    }
+
+    public string ProductPriceByMax()
+    {
+        var context = new SignalRContext();
+        return context.Products.Where(x => x.Price == context.Products.Max(y => y.Price))
+            .Select(z => z.ProductName).FirstOrDefault();
+    }
+    public string ProductPriceByMin()
+    {
+        var context = new SignalRContext();
+        return context.Products.Where(x=>x.Price==context.Products.Min(y=>y.Price))
+            .Select(z=>z.ProductName).FirstOrDefault();
+    }
 }
