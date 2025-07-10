@@ -69,6 +69,9 @@ builder.Services.AddScoped<IOrderDetailDal, EfOrderDetailDal>();
 builder.Services.AddScoped<IMoneyCasesService, MoneyCasesManager>();
 builder.Services.AddScoped<IMoneyCasesDal, EfMoneyCasesDal>();
 
+builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
+builder.Services.AddScoped<IMenuTableDal, EfMenuTableDal>();
+
 // Swagger ayarları
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

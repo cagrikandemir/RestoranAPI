@@ -23,6 +23,16 @@ public class EfOrderDal : GenericRepository<Order>, IOrderDal
         return context.Orders.OrderByDescending(x => x.OrderId).Take(1).Select(y => y.TotalPrice).FirstOrDefault();
     }
 
+    public decimal TodayTotalPrice()
+    {
+        var context = new SignalRContext();
+        var today = DateTime.Today;
+
+        return context.Orders
+            .Where(x => x.OrderDate >= today && x.OrderDate < today.AddDays(1))
+            .Sum(x => x.TotalPrice);
+    }
+
     public int TotalOrderCount()
     {
         var context = new SignalRContext();
