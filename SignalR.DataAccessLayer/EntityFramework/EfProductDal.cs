@@ -45,6 +45,13 @@ public class EfProductDal : GenericRepository<Product>, IProductDal
         return context.Products.Average(x => x.Price);
     }
 
+    public decimal ProductAvgPriceByHamburger()
+    {
+        var context = new SignalRContext();
+        return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburger")
+        .Select)(z => z.CategoryId).FirstOrDefault()).Average(w => w.Price);
+    }
+
     public string ProductPriceByMax()
     {
         var context = new SignalRContext();

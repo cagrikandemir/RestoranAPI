@@ -1,4 +1,4 @@
-﻿using SignalR.EntityLayer.Entities;
+﻿    using SignalR.EntityLayer.Entities;
 
 namespace SignalR.DataAccessLayer.Abstract;
 
@@ -11,4 +11,5 @@ public interface IProductDal : IGenericDal<Product>
     decimal ProductPriceAvg();
     string ProductPriceByMax();
     string ProductPriceByMin();
+    decimal ProductAvgPriceByHamburger();
 }

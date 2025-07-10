@@ -72,4 +72,9 @@ public class ProductManager : IProductService
     {
         return _productDal.ProductPriceByMin();
     }
+
+    public decimal TProductAvgPriceByHamburger()
+    {
+        return _productDal.ProductAvgPriceByHamburger();
+    }
 }
