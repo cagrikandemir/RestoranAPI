@@ -7,6 +7,7 @@ using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.EntityFramework;
 using SignalRApi.Hubs;
 using SignalRApi.Mapping;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +72,14 @@ builder.Services.AddScoped<IMoneyCasesDal, EfMoneyCasesDal>();
 
 builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
 builder.Services.AddScoped<IMenuTableDal, EfMenuTableDal>();
+
+builder.Services.AddScoped<IBasketService, BasketManager>();
+builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
+
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Swagger ayarları
 builder.Services.AddEndpointsApiExplorer();
