@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SignalR.BusinessLayer.Abstract;
+using SignalR.DataAccessLayer.Concrete;
+using SignalR.DtoLayer.BasketDto;
+using SignalR.EntityLayer.Entities;
+using SignalRApi.Models;
 
 namespace SignalRApi.Controllers
 {
@@ -18,6 +23,36 @@ namespace SignalRApi.Controllers
         public IActionResult GetBasketByMenuTableNumber(int Id)
         {
             return Ok(_basketService.TGetBasketByMenuTableNumber(Id));
+        }
+        [HttpGet("[action]")]
+        public IActionResult BasketListByMenuTableWithProductName(int Id)
+        {
+            using var context = new SignalRContext();
+            var values = context.Baskets.Include(x => x.Product).Where(y => y.MenuTableId == Id).Select(z => new ResultBasketListWithProductName
+            {
+                BasketId = z.BasketId,
+                Count = z.Count,
+                MenuTableId = z.MenuTableId,
+                Price = z.Price,
+                ProductId = z.ProductId,
+                TotalPrice = z.TotalPrice,
+                ProductName = z.Product.ProductName
+            }).ToList();
+            return Ok(values);
+        }
+        [HttpPost("[action]")]
+        public IActionResult AddBasket(CreateBasketDto createBasketDto)
+        {
+            var context= new SignalRContext();
+            _basketService.TAdd(new Basket()
+            {
+                ProductId = createBasketDto.ProductId,
+                Count = 1,
+                MenuTableId = 3,
+                Price = context.Products.Where(x => x.ProductId == createBasketDto.ProductId).Select(y => y.Price).FirstOrDefault()
+
+            });
+            return Ok();
         }
     }
 }
