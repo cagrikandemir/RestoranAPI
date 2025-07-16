@@ -4,8 +4,60 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <div class="content">
 	<div class="container-fluid">
+		<script type="text/javascript">
+
+			$(document).ready(() => {
+
+							var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7111/SignalRHub").build();
+				$("#connstatus").text(connection.state);
+				connection.start().then(() => {
+					$("#connstatus").text(connection.state);
+					setInterval(() => {
+						connection.invoke("GetBookingList");
+					}, 250);
+				}).catch((err) => { console.log(err) });
+
+
+				connection.on("ReceiveBookingList", (values) => {
+					console.log(values);
+					let tablehtml = `<table class=table mt-3><thead>
+									 <tr>
+									 <th scope="col">#</th>
+									 <th scope="col">Ad Soyad</th>
+									 <th scope="col">E-Mail</th>
+									 <th scope="col">Rezervasyon Durumu</th>
+									 <th scope="col">Telefon</th>
+									 <th scope="col">Kişi Sayısı</th>
+									 <th scope="col">Sil</th>
+									 <th scope="col">Güncelle</th>
+									 </tr>
+									 </thead>
+									 <tbody>`
+					$.each(values, (index, item) => {
+						tablehtml += `<tr>
+									<th>${item.bookingId}</th>
+									<td>${item.name}</td>
+									<td>${item.mail}</td>
+									<td>Rezervasyon Alındı</td>
+									<td>${item.phone}</td>
+									<td>${item.personCount}</td>
+									<td><a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-danger">Sil</a></td>
+									<td><a href="/Booking/UpdateBooking/${item.bookingId}" class="btn btn-outline-success">Güncelle</a></td>
+									</tr>`
+					});
+					tablehtml += "</tbody></table>";
+					$("#bookingList").html(tablehtml);
+				});
+			});
+
+		</script>
+
 		<h4 class="page-title">Rezervasyon İşlemleri</h4>
 		<div class="row">
 			<div class="col-md-12">
@@ -17,35 +69,7 @@
 						<div class="card-sub">
 							Revervasyonlar ile Alakalı İşlemleri Tablodan Yapabilirsiniz .
 						</div>
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Ad Soyad</th>
-									<th scope="col">Telefon</th>
-									<th scope="col">E-Mail</th>
-									<th scope="col">Kişi Sayısı</th>
-									<th scope="col">Rezervasyon Tarihi</th>
-									<th scope="col">Sil</th>
-									<th scope="col">Güncelle</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-									<tr>
-										<td>@item.BookingId</td>
-										<td>@item.Name</td>
-										<td>@item.Phone</td>
-										<td>@item.Mail</td>
-										<td>@item.PersonCount</td>
-										<td>@item.Date</td>
-										<td><a href="/Booking/DeleteBooking/@item.BookingId" class="btn btn-outline-danger">Sil</a></td>
-										<td><a href="/Booking/UpdateBooking/@item.BookingId" class="btn btn-outline-success">Güncelle</a></td>
-									</tr>
-								}
-							</tbody>
-						</table>
+						<div id="bookingList"></div>
 						<a href="/Booking/CreateBooking/" class="btn btn-outline-primary">Yeni Ekle</a>
 					</div>
 				</div>
