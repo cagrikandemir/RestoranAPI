@@ -2,6 +2,9 @@
 @{
     Layout = null;
     int count = 0;
+    decimal baskettotalprice=0;
+    decimal totalpricewithkdv = 0;
+    decimal tax = 0;
 
 }
 
@@ -45,6 +48,9 @@
                     @foreach (var item in Model)
                     {
                         count++;
+                        baskettotalprice = Model.Sum(x => x.Price);
+                        tax = baskettotalprice / 100 * 20;
+                        totalpricewithkdv = baskettotalprice + baskettotalprice * 0.2m;
                         <tbody class="align-middle">
                             <tr>
                                 <td class="align-middle">@count</td>
@@ -73,11 +79,11 @@
                     <div id="container" class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-6">
                             <h6>Toplam Tutar</h6>
-                            <h6><span id="totalprice">224 </span>Tl</h6>
+                            <h6><span id="totalprice">@baskettotalprice </span>Tl</h6>
                         </div>  
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Kdv Oranı</h6>
-                            <h6 class="font-weight-medium" id="kdv">20%</h6>
+                            <h6 class="font-weight-medium" id="kdv">@tax TL</h6>
                         </div>
                         <br />
 
@@ -85,7 +91,7 @@
                     <div class="pt-2">
                         <div class=" d-flex justify-content-between">
                             <h5>Toplam Tutar</h5>
-                            <h5><span id="totalpricewithkdv">250 </span>Tl</h5>
+                            <h5><span id="totalpricewithkdv">@totalpricewithkdv.ToString("0.00") </span>Tl</h5>
                         </div>
                         <br />
                         <button id="butonchecked" class=" btn btn-block btn-warning font-weight-bold my-3">Ödeme Yap</button>
