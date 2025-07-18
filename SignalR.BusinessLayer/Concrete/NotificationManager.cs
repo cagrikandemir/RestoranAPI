@@ -28,6 +28,11 @@ public class NotificationManager : INotificationService
         return _notificationdal.GetAllList();
     }
 
+    public List<Notification> TGetAllNotificationByFalse()
+    {
+        return _notificationdal.GetAllNotificationByFalse();
+    }
+
     public Notification TGetById(int Id)
     {
         return _notificationdal.GetById(Id);
