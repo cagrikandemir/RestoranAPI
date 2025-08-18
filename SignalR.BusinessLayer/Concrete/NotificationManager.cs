@@ -43,6 +43,16 @@ public class NotificationManager : INotificationService
         return _notificationdal.GetNotificationCountByStatusFalse();
     }
 
+    public void TNotificationStatusChangeToFalse(int id)
+    {
+        _notificationdal.NotificationStatusChangeToFalse(id);
+    }
+
+    public void TNotificationStatusChangeToTrue(int id)
+    {
+        _notificationdal.NotificationStatusChangeToTrue(id);
+    }
+
     public void TUpdate(Notification entity)
     {
          _notificationdal.Update(entity);
