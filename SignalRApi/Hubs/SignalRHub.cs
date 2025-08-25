@@ -79,7 +79,6 @@ namespace SignalRApi.Hubs
 
         }
 
-
         public async Task SendProgress()
         {
             var value = _moneyCasesService.TGetTotalMoneyCases();
@@ -106,6 +105,12 @@ namespace SignalRApi.Hubs
 
             var notificationlistbyfalse= _notificationService.TGetAllNotificationByFalse();
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", notificationlistbyfalse);
+        }
+
+        public async Task GetMenuTableStatus()
+        {
+            var values = _menuTableService.TGetAllList();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", values);
         }
 
     }
