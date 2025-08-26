@@ -5,6 +5,7 @@ using SignalR.BusinessLayer.Concrete;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.EntityFramework;
+using SignalR.EntityLayer.Entities;
 using SignalRApi.Hubs;
 using SignalRApi.Mapping;
 using System.Text.Json.Serialization;
@@ -24,7 +25,6 @@ builder.Services.AddCors(opt =>
 });
 builder.Services.AddSignalR();
 // SignalR servisini ekle
-
 
 // Diğer servisler
 builder.Services.AddControllers();
