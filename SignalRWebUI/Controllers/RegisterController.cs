@@ -19,7 +19,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(RegisterDto registerDto)
+        public async Task<IActionResult> Index(RegisterDto registerDto)
         {
             var user = new AppUser
             {
@@ -28,7 +28,7 @@ namespace SignalRWebUI.Controllers
                 Email = registerDto.Mail,
                 UserName = registerDto.Username
             };
-            var result = _userManager.CreateAsync(user, registerDto.Password).Result;
+            var result = await _userManager.CreateAsync(user,registerDto.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Login");

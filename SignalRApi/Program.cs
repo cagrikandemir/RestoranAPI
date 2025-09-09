@@ -23,6 +23,8 @@ builder.Services.AddCors(opt =>
         .AllowCredentials();
     });
 });
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SignalRContext>();
+
 builder.Services.AddSignalR();
 // SignalR servisini ekle
 

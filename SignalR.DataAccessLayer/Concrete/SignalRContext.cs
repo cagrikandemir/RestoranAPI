@@ -6,6 +6,14 @@ namespace SignalR.DataAccessLayer.Concrete;
 
 public class SignalRContext : IdentityDbContext<AppUser, AppRole, int>
 {
+    //public SignalRContext()
+    //{
+    //}
+
+    //public SignalRContext(DbContextOptions options) : base(options)
+    //{
+    //}
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Server=Cagri;initial Catalog=SignalRDb;integrated Security=true;TrustServerCertificate=True");

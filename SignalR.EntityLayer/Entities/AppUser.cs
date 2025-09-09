@@ -6,5 +6,6 @@ namespace SignalR.EntityLayer.Entities
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        //public string Password { get; set; }
     }
 }

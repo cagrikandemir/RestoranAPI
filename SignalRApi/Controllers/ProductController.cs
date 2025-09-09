@@ -52,7 +52,7 @@ namespace SignalRApi.Controllers
             CategoryName = y.Category.CategoryName
         }).ToList();
 
-            return Ok(values);
+            return Ok(values.ToList());
 
         }
         [HttpGet("[action]")]
