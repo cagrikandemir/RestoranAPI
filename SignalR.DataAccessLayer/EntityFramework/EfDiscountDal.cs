@@ -10,4 +10,20 @@ public class EfDiscountDal : GenericRepository<Discount>, IDiscountDal
     public EfDiscountDal(SignalRContext contex) : base(contex)
     {
     }
+
+    public void StatusChangeToActive(int id)
+    {
+        using var context = new SignalRContext();
+        var values = context.Discounts.Find(id);
+        values.Status = true;
+        context.SaveChanges();
+    }
+
+    public void StatusChangeToPassive(int id)
+    {
+        using var context = new SignalRContext();
+        var values = context.Discounts.Find(id);
+        values.Status = false;
+        context.SaveChanges();
+    }
 }

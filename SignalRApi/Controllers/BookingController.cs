@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.BookingDto;
 using SignalR.EntityLayer.Entities;
@@ -47,6 +46,7 @@ namespace SignalRApi.Controllers
                 Name = createBookingDto.Name,
                 Mail = createBookingDto.Mail,
                 Phone = createBookingDto.Phone,
+                Description= "Rezervasyon Alındı",
                 PersonCount = createBookingDto.PersonCount,
                 Date = createBookingDto.Date
             };

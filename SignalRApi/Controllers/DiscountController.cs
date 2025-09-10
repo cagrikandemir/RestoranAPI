@@ -28,6 +28,18 @@ namespace SignalRApi.Controllers
             var value = _discountService.TGetById(Id);
             return Ok(value);
         }
+        [HttpGet("[action]/{id}")]
+        public IActionResult StatusChangeToActive(int id)
+        {
+            _discountService.TStatusChangeToActive(id);
+            return Ok("Status Changed To Active");
+        }
+        [HttpGet("[action]/{id}")]
+        public IActionResult StatusChangeToPassive(int id)
+        {
+            _discountService.TStatusChangeToPassive(id);
+            return Ok("Status Changed To Passive");
+        }
         [HttpPost("[action]")]
         public IActionResult Add(CreateDiscountDto createDiscountDto)
         {
