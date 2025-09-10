@@ -28,6 +28,17 @@ namespace SignalRApi.Controllers
             var value = _bookingService.TGetById(Id);
             return Ok(value);
         }
+        [HttpGet("[action]/{id}")]
+        public IActionResult BookingStatusApproved(int id ){
+           _bookingService.TBookingStatusApproved(id);
+            return Ok("Booking Status Approved");
+        }
+        [HttpGet("[action]/{id}")]
+        public IActionResult BookingStatusCancelled(int id)
+        {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Booking Status Cancelled");
+        }
         [HttpPost("[action]")]
         public IActionResult Add(CreateBookingDto createBookingDto)
         {
