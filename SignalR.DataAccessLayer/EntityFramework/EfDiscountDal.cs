@@ -11,6 +11,14 @@ public class EfDiscountDal : GenericRepository<Discount>, IDiscountDal
     {
     }
 
+    public List<Discount> GetListDiscountByTrue()
+    {
+        using var context = new SignalRContext();
+        var values = context.Discounts.Where(x => x.Status == true
+        ).ToList();
+        return values;
+    }
+
     public void StatusChangeToActive(int id)
     {
         using var context = new SignalRContext();

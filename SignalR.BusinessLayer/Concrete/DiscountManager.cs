@@ -33,6 +33,11 @@ public class DiscountManager : IDiscountService
         return _discountDal.GetById(Id);
     }
 
+    public List<Discount> TGetListDiscountByTrue()
+    {
+        return _discountDal.GetListDiscountByTrue();
+    }
+
     public void TStatusChangeToActive(int id)
     {
         _discountDal.StatusChangeToActive(id);

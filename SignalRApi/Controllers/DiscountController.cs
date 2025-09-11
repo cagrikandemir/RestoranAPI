@@ -40,6 +40,12 @@ namespace SignalRApi.Controllers
             _discountService.TStatusChangeToPassive(id);
             return Ok("Status Changed To Passive");
         }
+        [HttpGet("[action]")]
+        public IActionResult GetListDiscountByTrue()
+        {
+            var values = _discountService.TGetListDiscountByTrue();
+            return Ok(values);
+        }
         [HttpPost("[action]")]
         public IActionResult Add(CreateDiscountDto createDiscountDto)
         {
