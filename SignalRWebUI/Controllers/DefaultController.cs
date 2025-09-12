@@ -1,9 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SignalRWebUI.Dtos.MessageDtos;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SignalRWebUI.Controllers
 {
     public class DefaultController : Controller
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public DefaultController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -14,9 +25,17 @@ namespace SignalRWebUI.Controllers
             return PartialView();
         }
         [HttpPost]
-        public IActionResult SendMessage()
+        public async Task<IActionResult> SendMessage(CreateMessageDto createMessageDto)
         {
-            return RedirectToAction("Index");
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createMessageDto);
+            StringContent stringContent= new StringContent(jsonData,Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7111/Message/Add", stringContent);
+            if(responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
