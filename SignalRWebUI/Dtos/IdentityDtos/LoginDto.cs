@@ -1,4 +1,4 @@
-﻿namespace SignalRWebUI.Dtos.LoginDtos;
+﻿namespace SignalRWebUI.Dtos.IdentityDtos;
 
 public class LoginDto
 {
