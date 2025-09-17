@@ -31,7 +31,6 @@ namespace SignalRWebUI.Controllers
             else
                 return View();
         }
-        [HttpPost]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
