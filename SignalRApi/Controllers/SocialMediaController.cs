@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.SocialMediaDto;
@@ -11,45 +11,35 @@ namespace SignalRApi.Controllers
     public class SocialMediaController : ControllerBase
     {
         private readonly ISocialMediaService _socialMediaService;
+        private readonly IMapper _mapper;
 
-        public SocialMediaController(ISocialMediaService socialMediaService)
+        public SocialMediaController(ISocialMediaService socialMediaService, IMapper mapper)
         {
             _socialMediaService = socialMediaService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _socialMediaService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<SocialMedia>>(_socialMediaService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _socialMediaService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<SocialMedia>(_socialMediaService.TGetById(Id)));
         }
         [HttpPost("[action]")]
         public IActionResult Add(CreateSocialMediaDto createSocialMediaDto)
         {
-            SocialMedia socialmedia = new SocialMedia
-            {
-                Title = createSocialMediaDto.Title,
-                Url = createSocialMediaDto.Url,
-                Icon = createSocialMediaDto.Icon
-            };
+            var socialmedia = _mapper.Map<SocialMedia>(createSocialMediaDto);
             _socialMediaService.TAdd(socialmedia);
             return Ok("Social Media Added Succesfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateSocialMediaDto updateSocialMediaDto)
         {
-            SocialMedia socialMedia = new SocialMedia
-            {
-                SocialMediaId = updateSocialMediaDto.SocialMediaId,
-                Title = updateSocialMediaDto.Title,
-                Url = updateSocialMediaDto.Url,
-                Icon = updateSocialMediaDto.Icon
-            };
+            var socialMedia = _mapper.Map<SocialMedia>(updateSocialMediaDto);
+
             _socialMediaService.TUpdate(socialMedia);
             return Ok("Social Media Updated Succesfully");
         }

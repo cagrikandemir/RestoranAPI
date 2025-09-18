@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.DiscountDto;
@@ -11,22 +12,22 @@ namespace SignalRApi.Controllers
     public class DiscountController : ControllerBase
     {
         private readonly IDiscountService _discountService;
+        private readonly IMapper _mapper;
 
-        public DiscountController(IDiscountService discountService)
+        public DiscountController(IDiscountService discountService, IMapper mapper)
         {
             _discountService = discountService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _discountService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<Discount>>(_discountService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _discountService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<Discount>(_discountService.TGetById(Id)));
         }
         [HttpGet("[action]/{id}")]
         public IActionResult StatusChangeToActive(int id)
@@ -49,27 +50,15 @@ namespace SignalRApi.Controllers
         [HttpPost("[action]")]
         public IActionResult Add(CreateDiscountDto createDiscountDto)
         {
-            Discount discount = new Discount
-            {
-                Title = createDiscountDto.Title,
-                Despcription = createDiscountDto.Despcription,
-                Amount = createDiscountDto.Amount,
-                ImageUrl = createDiscountDto.ImageUrl
-            };
+            var discount = _mapper.Map<Discount>(createDiscountDto);
             _discountService.TAdd(discount);
             return Ok("About Added Successfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateDiscountDto updateDiscountDto)
         {
-            Discount discount = new Discount
-            {
-                DiscountId = updateDiscountDto.DiscountId,
-                Title = updateDiscountDto.Title,
-                Despcription = updateDiscountDto.Despcription,
-                Amount = updateDiscountDto.Amount,
-                ImageUrl = updateDiscountDto.ImageUrl
-            };
+            var discount = _mapper.Map<Discount>(updateDiscountDto);
+
             _discountService.TUpdate(discount);
             return Ok("About Updated Successfully");
         }

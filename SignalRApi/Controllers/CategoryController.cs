@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.CategoryDto;
@@ -11,22 +12,22 @@ namespace SignalRApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _categoryService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<Category>>(_categoryService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _categoryService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<Category>(_categoryService.TGetById(Id)));
         }
         [HttpGet("[action]")]
         public IActionResult GetCategoryCount()
@@ -46,23 +47,14 @@ namespace SignalRApi.Controllers
         [HttpPost("[action]")]
         public IActionResult Add(CreateCategoryDto createCategoryDto)
         {
-            Category category = new Category
-            {
-                CategoryName = createCategoryDto.CategoryName,
-                CategoryStatus = createCategoryDto.CategoryStatus
-            };
+            var category = _mapper.Map<Category>(createCategoryDto);
             _categoryService.TAdd(category);
             return Ok("Category Added Successfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateCategoryDto updateCategoryDto)
         {
-            Category category = new Category
-            {
-                CategoryId = updateCategoryDto.CategoryId,
-                CategoryName = updateCategoryDto.CategoryName,
-                CategoryStatus = updateCategoryDto.CategoryStatus
-            };
+            var category = _mapper.Map<Category>(updateCategoryDto);
             _categoryService.TUpdate(category);
             return Ok("Category Updated Successfully");
         }

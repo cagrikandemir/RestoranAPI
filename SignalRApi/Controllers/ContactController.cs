@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ContactDto;
@@ -11,55 +12,35 @@ namespace SignalRApi.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
+        private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService)
+        public ContactController(IContactService contactService, IMapper mapper)
         {
             _contactService = contactService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _contactService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<Contact>>(_contactService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _contactService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<Contact>(_contactService.TGetById(Id)));
         }
         [HttpPost("[action]")]
         public IActionResult Add(CreateContactDto createContactDto)
         {
-            Contact contact = new Contact
-            {
-                Location = createContactDto.Location,
-                Phone = createContactDto.Phone,
-                Mail = createContactDto.Mail,
-                FooterDespcription = createContactDto.FooterDespcription,
-                FooterTitle=createContactDto.FooterTitle,
-                OpenDays=createContactDto.OpenDays,
-                OpenDaysDescription=createContactDto.OpenDaysDescription,
-                OpenHours=createContactDto.OpenHours
-            };
+            var contact = _mapper.Map<Contact>(createContactDto);
             _contactService.TAdd(contact);
             return Ok("Contact Added Successfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateContactDto updateContactDto)
         {
-            Contact contact = new Contact
-            {
-                ContactId = updateContactDto.ContactId,
-                Location = updateContactDto.Location,
-                Phone = updateContactDto.Phone,
-                Mail = updateContactDto.Mail,
-                FooterDespcription = updateContactDto.FooterDespcription,
-                FooterTitle = updateContactDto.FooterTitle,
-                OpenDays = updateContactDto.OpenDays,
-                OpenDaysDescription = updateContactDto.OpenDaysDescription,
-                OpenHours = updateContactDto.OpenHours
-            };
+            var contact = _mapper.Map<Contact>(updateContactDto);
+
             _contactService.TUpdate(contact);
             return Ok("Contact Updated Successfully");
         }

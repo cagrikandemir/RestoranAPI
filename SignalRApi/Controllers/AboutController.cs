@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.BusinessLayer.Concrete;
@@ -12,45 +13,34 @@ namespace SignalRApi.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+        private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _aboutService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<About>>(_aboutService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _aboutService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<About>(_aboutService.TGetById(Id)));
         }
         [HttpPost("[action]")]
         public IActionResult Add(CreateAboutDto createAboutDto)
         {
-            About about = new About
-            {
-                Title = createAboutDto.Title,
-                Description = createAboutDto.Description,
-                ImageUrl = createAboutDto.ImageUrl
-            };
+           var about = _mapper.Map<About>(createAboutDto);
             _aboutService.TAdd(about);
             return Ok("About Added Successfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateAboutDto updateAboutDto) 
         {
-            About about = new About
-            {
-                AboutId = updateAboutDto.AboutId,
-                Title = updateAboutDto.Title,
-                Description = updateAboutDto.Description,
-                ImageUrl = updateAboutDto.ImageUrl
-            };
+            var about = _mapper.Map<About>(updateAboutDto);
             _aboutService.TUpdate(about);
             return Ok("About Updated Successfully");
         }

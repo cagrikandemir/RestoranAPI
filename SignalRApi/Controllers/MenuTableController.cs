@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
-using SignalR.DataAccessLayer.Abstract;
 using SignalR.DtoLayer.MenuTableDto;
 using SignalR.EntityLayer.Entities;
 
@@ -11,15 +11,17 @@ namespace SignalRApi.Controllers
     public class MenuTableController : ControllerBase
     {
         private readonly IMenuTableService _menuTableService;
+        private readonly IMapper _mapper;
 
-        public MenuTableController(IMenuTableService menuTableService)
+        public MenuTableController(IMenuTableService menuTableService, IMapper mapper)
         {
             _menuTableService = menuTableService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            return Ok(_menuTableService.TGetAllList());
+            return Ok(_mapper.Map<List<MenuTable>>(_menuTableService.TGetAllList()));
         }
         [HttpGet("[action]")]
         public IActionResult GetTotalMenuTableCount()
@@ -32,18 +34,14 @@ namespace SignalRApi.Controllers
             var value = _menuTableService.TGetById(id);
             if (value != null)
             {
-                return Ok(value);
+                return Ok(_mapper.Map<MenuTable>(value));
             }
             return NotFound("Menu Table Not Found");
         }
         [HttpPost("[action]")]
         public IActionResult Add(CreateMenuTableDto createMenuTableDto)
         {
-            MenuTable menuTable = new()
-            {
-                Name = createMenuTableDto.Name,
-                Status = createMenuTableDto.Status
-            };
+            var menuTable = _mapper.Map<MenuTable>(createMenuTableDto);
             _menuTableService.TAdd(menuTable);
             return Ok("Menu Table Added Succesfuly");
         }
@@ -61,12 +59,8 @@ namespace SignalRApi.Controllers
         [HttpPut("[action]")]
         public IActionResult Update (UpdateMenuTableDto updateMenuTableDto)
         {
-            MenuTable menuTable = new()
-            {
-                MenuTableId = updateMenuTableDto.MenuTableId,
-                Name = updateMenuTableDto.Name,
-                Status = updateMenuTableDto.Status
-            };
+            var menuTable = _mapper.Map<MenuTable>(updateMenuTableDto);
+
             _menuTableService.TUpdate(menuTable);
             return Ok("Menu Table Updated Succesfuly");
         }

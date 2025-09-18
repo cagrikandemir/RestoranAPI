@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.FeatureDto;
@@ -11,51 +12,35 @@ namespace SignalRApi.Controllers
     public class FeatureController : ControllerBase
     {
         private readonly IFeatureService _featureService;
+        private readonly IMapper _mapper;
 
-        public FeatureController(IFeatureService featureService)
+        public FeatureController(IFeatureService featureService, IMapper mapper)
         {
             _featureService = featureService;
+            _mapper = mapper;
         }
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _featureService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<Feature>>(_featureService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _featureService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<Feature>(_featureService.TGetById(Id)));
         }
         [HttpPost("[action]")]
         public IActionResult Add(CreateFeatureDto createFeatureDto)
         {
-            Feature feature = new Feature
-            {
-                Title1 = createFeatureDto.Title1,
-                Despcription1 = createFeatureDto.Despcription1,
-                Title2 = createFeatureDto.Title2,
-                Despcription2 = createFeatureDto.Despcription2,
-                Title3 = createFeatureDto.Title3,
-                Despcription3 = createFeatureDto.Despcription3
-            };
+            var feature = _mapper.Map<Feature>(createFeatureDto);
             _featureService.TAdd(feature);
             return Ok("Feature Added Succesfuly");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateFeatureDto updateFeatureDto)
         {
-            Feature feature = new Feature
-            {
-                FeatureId = updateFeatureDto.FeatureId,
-                Title1 = updateFeatureDto.Title1,
-                Despcription1 = updateFeatureDto.Despcription1,
-                Title2 = updateFeatureDto.Title2,
-                Despcription2 = updateFeatureDto.Despcription2,
-                Title3 = updateFeatureDto.Title3,
-                Despcription3 = updateFeatureDto.Despcription3
-            };
+            var feature = _mapper.Map<Feature>(updateFeatureDto);
+
             _featureService.TUpdate(feature);
             return Ok("Feature Updated Succesfuly");
         }

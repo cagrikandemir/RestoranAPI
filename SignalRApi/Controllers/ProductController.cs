@@ -27,14 +27,12 @@ namespace SignalRApi.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAll()
         {
-            var values = _productService.TGetAllList();
-            return Ok(values);
+            return Ok(_mapper.Map<List<Product>>(_productService.TGetAllList()));
         }
         [HttpGet("[action]/{Id}")]
         public IActionResult GetById(int Id)
         {
-            var value = _productService.TGetById(Id);
-            return Ok(value);
+            return Ok(_mapper.Map<Product>(_productService.TGetById(Id)));
 
         }
         [HttpGet("[action]")]
@@ -93,31 +91,15 @@ namespace SignalRApi.Controllers
         [HttpPost("[action]")]
         public IActionResult Add(CreateProductDto createProductDto)
         {
-            Product product = new Product
-            {
-                ProductName = createProductDto.ProductName,
-                Despcription = createProductDto.Despcription,
-                Price = createProductDto.Price,
-                ImageUrl = createProductDto.ImageUrl,
-                ProductStatus = createProductDto.ProductStatus,
-                CategoryId=createProductDto.CategoryId
-            };
+            var product = _mapper.Map<Product>(createProductDto);
             _productService.TAdd(product);
             return Ok("Product Added Succesfully");
         }
         [HttpPut("[action]")]
         public IActionResult Update(UpdateProductDto updateProductDto)
         {
-            Product product = new Product
-            {
-                ProductId = updateProductDto.ProductId,
-                ProductName = updateProductDto.ProductName,
-                Despcription = updateProductDto.Despcription,
-                Price = updateProductDto.Price,
-                ImageUrl = updateProductDto.ImageUrl,
-                ProductStatus = updateProductDto.ProductStatus,
-                CategoryId = updateProductDto.CategoryId
-            };
+            var product = _mapper.Map<Product>(updateProductDto);
+
             _productService.TUpdate(product);
             return Ok("Product Updated Succesfully");
         }
