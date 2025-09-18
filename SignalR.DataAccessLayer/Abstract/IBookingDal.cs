@@ -6,4 +6,5 @@ public interface IBookingDal : IGenericDal<Booking>
 {
     void BookingStatusApproved(int id);
     void BookingStatusCancelled(int id);
+    int BookingCount();
 }

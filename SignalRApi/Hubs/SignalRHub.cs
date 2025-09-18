@@ -89,6 +89,27 @@ namespace SignalRApi.Hubs
 
             var value3=_menuTableService.TTotalMenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableProgress", value3);
+
+            var value5 = _productService.TProductPriceAvg();
+            await Clients.All.SendAsync("ReceiveProductPriceAvgProgress", value5);
+
+            var value6 = _productService.TProductAvgPriceByHamburger();
+            await Clients.All.SendAsync("ReceiveProductAvgPriceByHamburgerProgress", value6);
+
+            var value7= _productService.TProductCountByCategoryNameDrink();
+            await Clients.All.SendAsync("ReceiveDrinkProductCountProgress", value7);
+
+            var value8= _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCountProgress", value8);
+
+            var value9 = _bookingService.TBookingCount();
+            await Clients.All.SendAsync("ReceiveBookingCountProgress", value9);
+
+            var value10=_categoryService.TCategoryCount();
+            await Clients.All.SendAsync("ReceiveCategoryCountProgress", value10);
+
+            var value11 = _productService.TProductCount();
+            await Clients.All.SendAsync("ReceiveProductCountProgress", value11);
         }
 
         public async Task GetBookingList()
