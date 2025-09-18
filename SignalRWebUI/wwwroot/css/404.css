@@ -1,0 +1,71 @@
+﻿body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #0e0e0e, #1a1a1a);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.bg-shape {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(251,191,36,0.15);
+    filter: blur(120px);
+    animation: float 12s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(-100px,-50px);
+    }
+
+    100% {
+        transform: translate(100px,100px);
+    }
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 60px 80px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+    .card h1 {
+        font-size: 5rem;
+        background: linear-gradient(90deg, #fbbf24, #ffd95a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+    }
+
+    .card p {
+        font-size: 1.2rem;
+        margin: 20px 0 40px;
+        opacity: 0.9;
+    }
+
+    .card a {
+        padding: 14px 32px;
+        border-radius: 40px;
+        background: #fbbf24;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        box-shadow: 0 0 15px rgba(251,191,36,0.6);
+        transition: 0.3s;
+    }
+
+        .card a:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(251,191,36,0.9);
+        }
