@@ -12,4 +12,6 @@ public interface IProductDal : IGenericDal<Product>
     string ProductPriceByMax();
     string ProductPriceByMin();
     decimal ProductAvgPriceByHamburger();
+
+    List<Product> GetLast9Products();
 }

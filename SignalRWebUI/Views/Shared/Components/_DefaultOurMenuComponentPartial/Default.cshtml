@@ -6,20 +6,20 @@
                 Öne Çıkan Menüler
             </h2>
         </div>
-
-        <ul class="filters_menu">
+        @await Component.InvokeAsync("_MenuCategoryFilterComponentPartial")
+        @* <ul class="filters_menu">
             <li class="active" data-filter="*">Tümü</li>
             <li data-filter=".burger">Burger</li>
             <li data-filter=".pizza">Pizza</li>
             <li data-filter=".pasta">Pasta</li>
             <li data-filter=".fries">Fries</li>
-        </ul>
+        </ul> *@
 
         <div class="filters-content">
             <div class="row grid">
                 @foreach (var item in Model)
                 {
-                    <div class="col-sm-6 col-lg-4 all pizza">
+                    <div class="col-sm-6 col-lg-4 all @item.CategoryName">
                         <div class="box">
                             <div>
                                 <div class="img-box">

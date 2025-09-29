@@ -64,4 +64,11 @@ public class EfProductDal : GenericRepository<Product>, IProductDal
         return context.Products.Where(x=>x.Price==context.Products.Min(y=>y.Price))
             .Select(z=>z.ProductName).FirstOrDefault();
     }
+
+    public List<Product> GetLast9Products()
+    {
+        using var context = new SignalRContext();
+        var values = context.Products.Take(9).ToList();
+        return values;
+    }
 }
