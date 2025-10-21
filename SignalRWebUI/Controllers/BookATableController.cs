@@ -1,4 +1,5 @@
 ﻿
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.BookingDtos;
@@ -23,6 +24,17 @@ namespace SignalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDto createBookingDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                TempData["ValidationErrors"] = string.Join("||", errors);
+
+                return View(createBookingDto);
+            }
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");

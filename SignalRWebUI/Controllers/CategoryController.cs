@@ -41,8 +41,10 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/Category/Add", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Kategori başarıyla eklendi!";
                 return RedirectToAction("Index");
             }
+            
             return View();
 
         }
