@@ -44,7 +44,12 @@ namespace SignalRWebUI.Controllers
                 TempData["SuccessMessage"] = "Kategori başarıyla eklendi!";
                 return RedirectToAction("Index");
             }
-            
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Kategori eklenirken bir hata oluştu.";
+                return View();
+            }
+
             return View();
 
         }
@@ -54,7 +59,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Category/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Kategori başarıyla Silindi!";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Kategori Silinirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -80,7 +91,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/Category/Update",stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Kategori başarıyla Güncellendi!";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Kategori Silinirken bir hata oluştu.";
+                return View();
             }
             return View();
 
