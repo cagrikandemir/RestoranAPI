@@ -28,8 +28,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Shared\_NotificationScriptsComponentPartial\" />
-  </ItemGroup>
-
 </Project>

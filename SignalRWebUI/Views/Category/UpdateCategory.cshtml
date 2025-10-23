@@ -39,36 +39,4 @@
         </div>
     </div>
 </div>
-@await Html.PartialAsync("Default.cshtml")
-
-@* <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-
-<!-- jQuery (gereklidir) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-<script>
-        toastr.options = {
-      "closeButton": true,
-      "progressBar": true,
-      "positionClass": "toast-top-right", // sağ üst köşe
-      "timeOut": "2000"
-    }
-
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <text>
-                    toastr.success("@TempData["SuccessMessage"]");
-        </text>
-    }
-
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <text>
-                    toastr.error("@TempData["ErrorMessage"]");
-        </text>
-    }
-
-</script> *@
+@await Component.InvokeAsync("_NotificationComponentPartial")
