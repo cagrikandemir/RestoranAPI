@@ -41,7 +41,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/About/Add", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Hakkımda başarıyla eklendi!";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Hakkımda eklenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -51,7 +57,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/About/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Hakkımda başarıyla Silindi!";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Hakkımda Silinirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -77,7 +89,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/About/Update", stringContent);
             if(responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Hakkımda başarıyla Güncellendi!";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Hakkımda Güncellenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }

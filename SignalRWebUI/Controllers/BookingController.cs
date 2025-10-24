@@ -42,7 +42,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/Booking/Add", StringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Rezervasyon başarıyla eklendi!";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode==false)
+            {
+                TempData["ErrorMessage"] = "Rezervasyon eklenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -52,6 +58,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Booking/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"]= "Rezervasyon başarıyla silindi!";
+                return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode== false)
+            {
+                TempData["ErrorMessage"] = "Rezervasyon silinirken bir hata oluştu.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -78,7 +90,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/Booking/Update", StringContent);
             if(responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Rezervasyon başarıyla güncellendi!";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode==false)
+            {
+                TempData["ErrorMessage"] = "Rezervasyon güncellenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -86,14 +104,34 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult>BookingStatusApproved(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Booking/BookingStatusApproved/{id}");
+            var responseMessage= await client.GetAsync($"https://localhost:7111/Booking/BookingStatusApproved/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Rezervasyon onaylandı!";
+                return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Rezervasyon onaylanırken bir hata oluştu.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> BookingStatusCancelled(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Booking/BookingStatusCancelled/{id}");
+            var responseMessage= await client.GetAsync($"https://localhost:7111/Booking/BookingStatusCancelled/{id}");
+            if(responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Rezervasyon iptal edildi!";
+                return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Rezervasyon iptal edilirken bir hata oluştu.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
     }

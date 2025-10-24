@@ -96,7 +96,7 @@ namespace SignalRWebUI.Controllers
             }
             if (responseMessage.IsSuccessStatusCode == false)
             {
-                TempData["ErrorMessage"] = "Kategori Silinirken bir hata oluştu.";
+                TempData["ErrorMessage"] = "Kategori Güncellenirken bir hata oluştu.";
                 return View();
             }
             return View();
