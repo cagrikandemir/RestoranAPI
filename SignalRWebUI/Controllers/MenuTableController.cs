@@ -41,7 +41,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/MenuTable/Add", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Masa başarıyla eklendi.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Masa eklenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }
@@ -51,6 +57,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/MenuTable/Remove/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Masa başarıyla silindi.";
+                return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Masa silinirken bir hata oluştu.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -77,7 +89,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/MenuTable/Update", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Masa başarıyla güncellendi.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Masa güncellenirken bir hata oluştu.";
+                return View();
             }
             return View();
         }

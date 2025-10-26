@@ -40,7 +40,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/Notification/Add", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Bildirim Başarıyla Oluşturuldu.";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Bildirim Oluşturulamadı. Lütfen Tekrar Deneyiniz.";
+                return View();
             }
             return View();
         }
@@ -50,7 +56,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Notification/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Bildirim Başarıyla Silindi.";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Bildirim Silinemedi. Lütfen Tekrar Deneyiniz.";
             }
             return View();
         }
@@ -76,7 +87,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/Notification/Update", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Bildirim Başarıyla Güncellendi.";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Bildirim Güncellenemedi. Lütfen Tekrar Deneyiniz.";
+                return View();
             }
             return View();
         }
@@ -84,13 +101,32 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> NotificationStatusChangeToTrue(int Id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Notification/GetNotificationStatusChangeToTrue/{Id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7111/Notification/GetNotificationStatusChangeToTrue/{Id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Bildirim Durumu Başarıyla Aktif Olarak Değiştirildi.";
+                return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Bildirim Durumu Değiştirilemedi. Lütfen Tekrar Deneyiniz.";
+            }
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> NotificationStatusChangeToFalse(int Id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Notification/GetNotificationStatusChangeToFalse/{Id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7111/Notification/GetNotificationStatusChangeToFalse/{Id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Bildirim Durumu Başarıyla Pasif Olarak Değiştirildi.";
+                return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Bildirim Durumu Değiştirilemedi. Lütfen Tekrar Deneyiniz.";
+            }
             return RedirectToAction("Index");
         }
     }

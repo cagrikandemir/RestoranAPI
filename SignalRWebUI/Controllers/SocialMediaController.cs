@@ -39,7 +39,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/SocialMedia/Add", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Sosyal Medya Başarıyla Eklendi";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Sosyal Medya Eklenirken Bir Hata Oluştu";
             }
             return View();
         }
@@ -49,7 +54,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/SocialMedia/Delete/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Sosyal Medya Başarıyla Silindi";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Sosyal Medya Silinirken Bir Hata Oluştu";
             }
             return View();
         }
@@ -75,7 +85,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/SocialMedia/Update", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Sosyal Medya Başarıyla Güncellendi";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Sosyal Medya Güncellenirken Bir Hata Oluştu";
             }
             return View();
         }

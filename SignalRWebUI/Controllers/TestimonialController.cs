@@ -38,7 +38,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/Testimonial/Add", content);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Yorum başarıyla oluşturuldu.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Yorum oluşturulurken bir hata oluştu.";
             }
             return View();
         }
@@ -48,7 +53,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Testimonial/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Yorum başarıyla silindi.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Yorum silinirken bir hata oluştu.";
             }
             return View();
         }
@@ -74,7 +84,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/Testimonial/Update", content);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Yorum başarıyla güncellendi.";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Yorum güncellenirken bir hata oluştu.";
             }
             return View();
         }

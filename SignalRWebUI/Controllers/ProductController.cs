@@ -34,7 +34,7 @@ namespace SignalRWebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7111/Category/GetAll");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var values= JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+            var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
             List<SelectListItem> values2 = (from x in values
                                             select new SelectListItem
                                             {
@@ -50,26 +50,34 @@ namespace SignalRWebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createProductDto);
-            var StringContent = new StringContent(jsonData,Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7111/Product/Add",StringContent);
+            var StringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7111/Product/Add", StringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = " Yeni Ürün Başarıyla Eklendi";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false){
+                TempData["ErrorMessage"] = "Ürün Eklenirken Hata Oluştu. Lütfen Tekrar Deneyiniz.";
             }
             return View();
         }
-        public async Task<IActionResult>DeleteProduct(int Id)
+        public async Task<IActionResult> DeleteProduct(int Id)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Product/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Ürün Başarıyla Silindi";
                 return RedirectToAction("Index");
+            }
+            if (responseMessage.IsSuccessStatusCode == false) {
+                TempData["ErrorMessage"] = "Ürün Silinirken Hata Oluştu. Lütfen Tekrar Deneyiniz.";
             }
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult>UpdateProduct(int Id)
+        public async Task<IActionResult> UpdateProduct(int Id)
         {
             var client = _httpClientFactory.CreateClient();
 
@@ -106,11 +114,16 @@ namespace SignalRWebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateproductdto);
-            var stringContent = new StringContent(jsonData,Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PutAsync("https://localhost:7111/Product/Update", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Ürün Başarıyla Güncellendi";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "Ürün Güncellenirken Hata Oluştu. Lütfen Tekrar Deneyiniz.";
             }
             return View();
         }

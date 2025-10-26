@@ -41,7 +41,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7111/Discount/Add", StringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "İndirim başarıyla oluşturuldu.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode==false)
+            {
+                TempData["ErrorMessage"] = "İndirim oluşturulamadı. Lütfen tekrar deneyiniz.";
             }
             return View();
         }
@@ -51,7 +56,12 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"https://localhost:7111/Discount/Delete/{Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "İndirim başarıyla silindi.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "İndirim silinemedi. Lütfen tekrar deneyiniz.";
             }
             return View();
         }
@@ -77,7 +87,13 @@ namespace SignalRWebUI.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7111/Discount/Update", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "İndirim başarıyla güncellendi.";
                 return RedirectToAction("Index");
+            }
+            if(responseMessage.IsSuccessStatusCode == false)
+            {
+                TempData["ErrorMessage"] = "İndirim güncellenemedi. Lütfen tekrar deneyiniz.";
+                return View();
             }
             return View();
         }
@@ -85,15 +101,33 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> StatusChangeToActive(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Discount/StatusChangeToActive/{id}");
-            return RedirectToAction("Index");
+           var responseMessage= await client.GetAsync($"https://localhost:7111/Discount/StatusChangeToActive/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "İndirim durumu aktif olarak değiştirildi.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "İndirim durumu değiştirilemedi. Lütfen tekrar deneyiniz.";
+                return RedirectToAction("Index");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> StatusChangeToPassive(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            await client.GetAsync($"https://localhost:7111/Discount/StatusChangeToPassive/{id}");
-            return RedirectToAction("Index");
+           var responseMessage= await client.GetAsync($"https://localhost:7111/Discount/StatusChangeToPassive/{id}");
+            if(responseMessage.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "İndirim durumu pasif olarak değiştirildi.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "İndirim durumu değiştirilemedi. Lütfen tekrar deneyiniz.";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
