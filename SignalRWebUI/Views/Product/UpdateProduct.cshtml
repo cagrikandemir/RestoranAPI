@@ -25,6 +25,10 @@
                                 <input type="text" class="form-control" asp-for="Price" id="price">
                             </div>
                             <div class="form-group">
+                                <label for="ımageurl">Ürün Resim(Url) Düzenleyiniz</label>
+                                <input type="text" class="form-control" asp-for="ImageUrl" id="ımageurl">
+                            </div>
+                            <div class="form-group">
                                 <label for="categoryname">Ürün Kategorisini Düzenleyiniz</label>
                                 @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
                             </div>

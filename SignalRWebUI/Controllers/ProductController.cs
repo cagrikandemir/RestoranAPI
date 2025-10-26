@@ -124,6 +124,7 @@ namespace SignalRWebUI.Controllers
             if(responseMessage.IsSuccessStatusCode == false)
             {
                 TempData["ErrorMessage"] = "Ürün Güncellenirken Hata Oluştu. Lütfen Tekrar Deneyiniz.";
+                return RedirectToAction("Index");
             }
             return View();
         }

@@ -14,38 +14,31 @@
                         <div class="card-header">
                             <div class="card-title">Yeni Ürün Girişi</div>
                         </div>
-                        <div class="card-body">
                             <div class="form-group">
                                 <label for="productname">Ürün Adını Giriniz</label>
                                 <input type="text" class="form-control" asp-for="ProductName" id="productname">
                             </div>
-                        </div>
-                        <div class="card-body">
+
                             <div class="form-group">
                                 <label for="despcription">Ürün Açıklamasını Giriniz</label>
                                 <input type="text" class="form-control" asp-for="Despcription" id="despcription">
                             </div>
-                        </div>
-                        <div class="card-body">
                             <div class="form-group">
                                 <label for="price">Ürün Fiyatı Giriniz</label>
                                 <input type="text" class="form-control" asp-for="Price" id="price">
                             </div>
-                        </div>
-                        <div class="card-body">
+
                             <div class="form-group">
                                 <label for="ımageurl">Ürün Görseli Seçiniz</label>
                                 <input type="text" class="form-control" asp-for="ImageUrl" id="ımageurl">
                             </div>
-                        </div>
-                        <div class="card-body">
                             <div class="form-group">
                                 <label for="categoryıd">Ürün Kategorisi Seçiniz</label>
                                 @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
                             </div>
-                        </div>
                         <div class="card-action">
                             <button class="btn btn-success">Ürünü Ekle</button>
+                            <a href="/Product" class="btn btn-warning">Geri Dön</a>
                         </div>
                     </div>
                 </form>
