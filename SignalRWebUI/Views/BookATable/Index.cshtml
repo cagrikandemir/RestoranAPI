@@ -28,13 +28,13 @@
                                 <input type="text" class="form-control" placeholder="İsim Soyisim" asp-for="Name" />
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="İletişim Numarası" asp-for="Phone"/>
+                                <input type="text" class="form-control" placeholder="İletişim Numarası" asp-for="Phone" />
                             </div>
                             <div>
-                                <input type="email" class="form-control" placeholder="E-Mail" asp-for="Mail"/>
+                                <input type="email" class="form-control" placeholder="E-Mail" asp-for="Mail" />
                             </div>
                             <div>
-                                <select  asp-for="PersonCount" class="form-control nice-select wide">
+                                <select asp-for="PersonCount" class="form-control nice-select wide">
                                     <option value="" disabled selected>
                                         Kaç Kişisiniz ?
                                     </option>
@@ -80,9 +80,7 @@
     <!-- footer section -->
     <!-- jQery -->
     @await Component.InvokeAsync("_UILayoutScriptsComponentPartial")
-
-    
+    @await Component.InvokeAsync("_NotificationComponentPartial")
 
 </body>
-
 </html>

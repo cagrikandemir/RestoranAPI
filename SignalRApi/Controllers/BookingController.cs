@@ -45,6 +45,7 @@ namespace SignalRApi.Controllers
         [HttpPost("[action]")]
         public IActionResult Add(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Description = "Yeni Rezervasyon";
             var validationResult = _createBookingDtoValidator.Validate(createBookingDto);
             if(!validationResult.IsValid)
             {
