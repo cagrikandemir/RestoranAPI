@@ -6,6 +6,7 @@
     decimal totalpricewithkdv = 0;
     decimal tax = 0;
     decimal unittotalprice = 0;
+    decimal totalprice = 0;
 
 }
 
@@ -53,14 +54,15 @@
                         tax = baskettotalprice / 100 * 20;
                         totalpricewithkdv = baskettotalprice + baskettotalprice * 0.2m;
                         unittotalprice = item.Count * item.Price;
-                        
+@*                         totalprice = count * unittotalprice;
+ *@                        
                         <tbody class="align-middle">
                             <tr>
                                 <td class="align-middle">@count</td>
                                 <td class="align-middle">@item.ProductName</td>
                                 <td class="align-middle">@item.Count</td>
                                 <td class="align-middle">@item.Price</td>
-                                <td class="align-middle">@unittotalprice.ToString("0.00")</td>
+                                <td class="align-middle">@unittotalprice.ToString("0.00"+"₺")</td>
                                 <td class="align-middle btn-delete"><a class="btn btn-sm btn-danger" href="/Baskets/DeleteBasket/@item.BasketId"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>

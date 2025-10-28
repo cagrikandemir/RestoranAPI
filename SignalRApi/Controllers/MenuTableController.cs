@@ -38,6 +38,18 @@ namespace SignalRApi.Controllers
             }
             return NotFound("Menu Table Not Found");
         }
+        [HttpGet("[action]/{Id}")]
+        public IActionResult ChangeMenuTableStatusToTrue(int Id)
+        {
+            _menuTableService.TChangeMenuTableStatusToTrue(Id);
+            return Ok("Menu Table Status Changed To True");
+        }
+        [HttpGet("[action]/{Id}")]
+        public IActionResult ChangeMenuTableStatusToFalse(int Id)
+        {
+            _menuTableService.TChangeMenuTableStatusToFalse(Id);
+            return Ok("Menu Table Status Changed To False");
+        }
         [HttpPost("[action]")]
         public IActionResult Add(CreateMenuTableDto createMenuTableDto)
         {

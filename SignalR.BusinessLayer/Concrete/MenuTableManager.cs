@@ -19,6 +19,16 @@ public class MenuTableManager : IMenuTableService
         _menuTableDal.Add(entity);
     }
 
+    public void TChangeMenuTableStatusToFalse(int Id)
+    {
+        _menuTableDal.ChangeMenuTableStatusToFalse(Id);
+    }
+
+    public void TChangeMenuTableStatusToTrue(int Id)
+    {
+        _menuTableDal.ChangeMenuTableStatusToTrue(Id);
+    }
+
     public void TDelete(MenuTable entity)
     {
         _menuTableDal.Delete(entity);
