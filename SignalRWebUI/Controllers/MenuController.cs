@@ -15,8 +15,9 @@ namespace SignalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int Id)
         {
+            ViewBag.TableId = Id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7111/Product/GetAllProductsWithCategory");
             if (responseMessage.IsSuccessStatusCode)
@@ -28,10 +29,19 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int Id)
+        public async Task<IActionResult> AddBasket(int Id,int MenuTableId)
         {
-            CreateBasketDto createBasketDto = new();
-            createBasketDto.ProductId = Id;
+            if(MenuTableId == 0)
+            {
+                TempData["CustomerSelectedTableWarning"] = "Lütfen Bir Masa Seçiniz";
+                return RedirectToAction("Index");
+            }
+            CreateBasketDto createBasketDto = new()
+            {
+                ProductId = Id,
+                MenuTableId = MenuTableId
+            };
+            //createBasketDto.MenuTableId = int.Parse(TempData["CustomerSelectedTable"].ToString());
             var client = _httpClientFactory.CreateClient();
             var JsonData = JsonConvert.SerializeObject(createBasketDto);
             var stringContent = new StringContent(JsonData, Encoding.UTF8, "application/json");

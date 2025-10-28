@@ -48,7 +48,7 @@
                                             <h6>
                                                 @item.Price ₺
                                             </h6>
-                                            <a href="#" onclick="showproductid(@item.ProductId)">
+                                            <a href="#" onclick="showproductid(@item.ProductId,@ViewBag.TableId)">
                                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                                                 <g>
                                                 <g>
@@ -116,32 +116,32 @@
     @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
 
     @await Component.InvokeAsync("_UILayoutScriptsComponentPartial")
-
     <script>
-        function showproductid(value) {
-            var id = value;
 
+        function showproductid(productId, menuTableId) {
             $.ajax({
                 type: 'POST',
-                data: { item: id },
-                url: "/Menu/AddBasket/"+id , 
-                contentType: 'application/json',
+                url: "/Menu/AddBasket",
+                data: {
+                    id: productId,
+                    menuTableId: menuTableId 
+                },
                 success: function () {
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Seçilen Ürün ID'si " + id,
+                        title: "Seçilen Ürün ID'si " + productId,
                         showConfirmButton: false,
                         timer: 1000
                     });
                 },
+                error: function (xhr, status, error) {
+                    console.error("Hata:", error);
+                    console.log("Yanıt:", xhr.responseText);
+                }
             });
-        }
+        };
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 </body>
-
 </html>

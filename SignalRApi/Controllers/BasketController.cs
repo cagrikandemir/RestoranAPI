@@ -48,11 +48,12 @@ namespace SignalRApi.Controllers
             {
                 ProductId = createBasketDto.ProductId,
                 Count = 1,
-                MenuTableId = 3,
+                MenuTableId = createBasketDto.MenuTableId,
+                TotalPrice = createBasketDto.TotalPrice,
                 Price = context.Products.Where(x => x.ProductId == createBasketDto.ProductId).Select(y => y.Price).FirstOrDefault()
 
             });
-            return Ok();
+            return Ok("Ürünler Sepete Eklendi");
         }
         [HttpDelete("[action]/{Id}")]
         public IActionResult DeleteBasket(int Id)
