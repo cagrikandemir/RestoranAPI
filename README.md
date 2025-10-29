@@ -139,3 +139,4 @@ Her katman, yalnızca kendi sorumluluk alanındaki görevleri üstlenmektedir.
 ---
 
 ## 🖼️ **Proje Görüntüleri**
+<img width="1900" height="865" alt="Ekran görüntüsü 2025-10-29 162531" src="https://github.com/user-attachments/assets/70277859-812b-4a30-a9e6-5e00e56bd1f1" />
