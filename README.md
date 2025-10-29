@@ -140,3 +140,18 @@ Her katman, yalnızca kendi sorumluluk alanındaki görevleri üstlenmektedir.
 
 ## 🖼️ **Proje Görüntüleri**
 <img width="1900" height="865" alt="Ekran görüntüsü 2025-10-29 162531" src="https://github.com/user-attachments/assets/70277859-812b-4a30-a9e6-5e00e56bd1f1" />
+<img width="1904" height="909" alt="Ekran görüntüsü 2025-10-29 162955" src="https://github.com/user-attachments/assets/0eab88fc-03d9-438e-b51d-e83a1629434c" />
+<img width="1901" height="755" alt="Ekran görüntüsü 2025-10-29 163033" src="https://github.com/user-attachments/assets/dc9f69b4-e25b-41ff-b5e0-fb44861f5e6f" />
+<img width="1905" height="904" alt="Ekran görüntüsü 2025-10-29 163131" src="https://github.com/user-attachments/assets/01d75c8c-55b0-4b23-abc1-92da234c684f" />
+<img width="1903" height="911" alt="Ekran görüntüsü 2025-10-29 164009" src="https://github.com/user-attachments/assets/da5ed295-f9da-4cf1-8322-3cc13b94ac62" />
+<img width="1903" height="905" alt="Ekran görüntüsü 2025-10-29 164128" src="https://github.com/user-attachments/assets/610ab69b-a979-45e3-b04a-b93196c26c0e" />
+<img width="1111" height="544" alt="Ekran görüntüsü 2025-10-29 164304" src="https://github.com/user-attachments/assets/6dc9bfcf-af32-4a27-a04b-d9a471e70e12" />
+<img width="1919" height="905" alt="Ekran görüntüsü 2025-10-29 164333" src="https://github.com/user-attachments/assets/0a7c629e-d796-42d1-86c5-a88df499e9a5" />
+<img width="1905" height="911" alt="Ekran görüntüsü 2025-10-29 164535" src="https://github.com/user-attachments/assets/eee3b63a-c77d-4183-b7cf-a2bcc146891f" />
+<img width="1919" height="910" alt="Ekran görüntüsü 2025-10-29 164609" src="https://github.com/user-attachments/assets/1c05314d-0dbb-4616-a7bc-2a1d9c178c7f" />
+<img width="1903" height="906" alt="Ekran görüntüsü 2025-10-29 164643" src="https://github.com/user-attachments/assets/178c4b30-97e5-4a58-9be1-0eab32802228" />
+<img width="1906" height="901" alt="Ekran görüntüsü 2025-10-29 164742" src="https://github.com/user-attachments/assets/f4bff47c-3153-4dc7-9188-844382d79c00" />
+<img width="1904" height="905" alt="Ekran görüntüsü 2025-10-29 164815" src="https://github.com/user-attachments/assets/d86c5436-6060-4cfd-9f85-86318dd5a4e9" />
+<img width="1918" height="910" alt="Ekran görüntüsü 2025-10-29 164904" src="https://github.com/user-attachments/assets/be208c46-fa55-42d8-a465-dfd89a8996b8" />
+<img width="1912" height="909" alt="Ekran görüntüsü 2025-10-29 164804" src="https://github.com/user-attachments/assets/63134004-15fe-4be9-bf6f-43fd1f1de41c" />
+
