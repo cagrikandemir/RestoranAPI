@@ -43,7 +43,6 @@ Her katman, yalnızca kendi sorumluluk alanındaki görevleri üstlenmektedir.
 - ASP.NET Core Identity (AppUser ile genişletilmiş)  
 - MailKit (Gerçek mail gönderimi)  
 - QR Code Generator  
-- RapidAPI (TastyAPI Entegrasyonu)  
 - Swagger  
 - LINQ  
 - AJAX & JavaScript  
