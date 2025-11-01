@@ -1,0 +1,9 @@
+Create Trigger IncreaseOrderTotalPrice
+on OrderDetails
+After Insert
+As
+Declare @OrderID int
+Declare @OrderPrice decimal
+Select @OrderID=OrderId from inserted
+Select @OrderPrice=TotalPrice from inserted
+update Orders Set TotalPrice=TotalPrice+@OrderPrice Where @OrderID=OrderId

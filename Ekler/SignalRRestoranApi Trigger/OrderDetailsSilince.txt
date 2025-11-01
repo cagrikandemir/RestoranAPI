@@ -1,0 +1,9 @@
+Create Trigger DecreaseOrderTotalPrice
+on OrderDetails
+After Delete
+As
+Declare @OrderID int
+Declare @OrderPrice decimal
+Select @OrderID=OrderId from deleted
+Select @OrderPrice=TotalPrice from deleted
+update Orders Set TotalPrice=TotalPrice-@OrderPrice Where @OrderID=OrderId

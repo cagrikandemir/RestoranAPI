@@ -1,0 +1,12 @@
+Create Trigger SumMoneyCases
+On Orders
+After Update
+as
+Declare @Description nvarchar(max)
+Declare @TotalPrice decimal
+Select @Description=Description from inserted
+Select @TotalPrice=TotalPrice from inserted
+if(@Description='Hesap Kapatıldı')
+begin
+Update MoneyCases set TotalAmount=TotalAmount+@TotalPrice
+end
